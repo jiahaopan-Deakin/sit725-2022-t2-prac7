@@ -1,6 +1,6 @@
 
 var express = require("express")
-var app = express()
+
 var router = express.Router()
 
 //let projectController = require("../controller/project");
@@ -23,7 +23,7 @@ let controller = require("../controller/index")
 //     projectCollection.find({}).toArray(callback);
 // }
 
-app.get('/',(req,res) => {
+router.get('/',(req,res) => {
     //     getProjects((err,result) => {
     //         if(err) {
     //             res.json({statusCode: 400, message: err})
@@ -38,7 +38,7 @@ app.get('/',(req,res) => {
 })
 
 //post api
-app.post('/',(req,res) => {
+router.post('/',(req,res) => {
     //     console.log("New Project added", req.body)
     //     var newProject = req.body;
     //     insertProjects(newProject,(err,result) => {
@@ -57,4 +57,4 @@ app.post('/',(req,res) => {
 
 
 
-module.exports = app;
+module.exports = router;
