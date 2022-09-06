@@ -17,5 +17,21 @@ describe("Add Two Numbers", function() {
                 done();
             });
         });
+        
+        it("returns the result equal to 8", function(done){
+            request(url, function(error, response, body){
+                body = JSON.parse(body);
+                expect(body.data).to.equal(8);
+                done();
+            });
+        })
+
+        it("returns the result equal to 100", function(done){
+            request(url, function(error, response, body){
+                body = JSON.parse(body);
+                expect(body.data).to.not.equal(100);
+                done();
+            });
+        })
 
     });
