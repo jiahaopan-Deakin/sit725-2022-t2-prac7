@@ -6,6 +6,8 @@ let dbConnect = require("./dbConnect");
 let userRouters = require("./routes/userRoutes");
 const { MongoUnexpectedServerResponseError } = require("mongodb");
 const { response } = require("express");
+let http = require("http").createServer(app);
+let io = require('socket.io')(http);
 
 app.use(express.static(__dirname+'/public'))
 app.use(express.json());
@@ -30,11 +32,20 @@ app.get('/addNumbers/:n1/:n2', function(request, response) {
     response.json({statusCode: 200, data: result});
 })
 
+io.on('connection', (socket) =>{
+    console.log('a user connected');
+    socket.on('disconnect', () =>{
+        console.log('user disconnected');
+    })
+    setInterval(() => {
+        socket.emit('number', parseInt(Math.random()*10));
+    },1000);
+})
 
 
 var port = process.env.port || 3000;
 
-app.listen(port,()=>{
+http.listen(port,()=>{
     console.log("App listening to: "+port)
     //createColllection("pets")
 })

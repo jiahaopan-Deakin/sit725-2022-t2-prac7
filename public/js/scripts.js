@@ -61,9 +61,12 @@ const getProjects = () => {
     })
 }
 
+let socket = io();
 
-
-
+socket.on('number', (msg) => {
+    $("#heading").html("Welcome to SIT725 Week 7: " + msg);
+    console.log("Random Number: " + msg);
+})
 
 $(document).ready(function(){
     $('.materialboxed').materialbox();
